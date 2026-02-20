@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/spine-empty",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-010",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "spine.*incomplete.*itemref",
+      "note": "epubcheck also reports RSC-011 for nav reference"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

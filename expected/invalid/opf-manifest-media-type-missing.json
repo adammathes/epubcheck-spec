@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-manifest-media-type-missing",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-007",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "missing required attribute.*media-type",
+      "note": "epubcheck reports cascading errors from missing media-type attribute"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}

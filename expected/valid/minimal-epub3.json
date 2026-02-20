@@ -1,0 +1,8 @@
+{
+  "fixture": "valid/minimal-epub3",
+  "valid": true,
+  "messages": [],
+  "fatal_count": 0,
+  "error_count": 0,
+  "warning_count": 0
+}

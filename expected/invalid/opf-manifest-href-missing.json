@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-manifest-href-missing",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-006",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "missing required attribute.*href",
+      "note": "epubcheck reports cascading errors: RSC-005 schema error plus OPF-049 and RSC-008"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}
