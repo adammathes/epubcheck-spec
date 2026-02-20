@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/epub2-guide-broken-href",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "E2-009",
+      "epubcheck_id": "OPF-031",
+      "message_pattern": "guide.*not declared in OPF manifest",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

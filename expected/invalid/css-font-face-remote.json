@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/css-font-face-remote",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "CSS-004",
+      "epubcheck_id": "OPF-014",
+      "message_pattern": "remote-resources.*should be declared",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

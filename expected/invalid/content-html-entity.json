@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-html-entity",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "FATAL",
+      "check_id": "HTM-017",
+      "epubcheck_id": "RSC-016",
+      "message_pattern": "entity.*was referenced.*not declared",
+      "note": ""
+    }
+  ],
+  "fatal_count": 1,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0
+}

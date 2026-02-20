@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-package-dir-invalid",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-034",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "dir.*invalid.*must be equal to",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

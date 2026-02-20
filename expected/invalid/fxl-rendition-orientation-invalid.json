@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/fxl-rendition-orientation-invalid",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "FXL-002",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "rendition:orientation.*must be either",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

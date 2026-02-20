@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-no-unique-id-attr",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-027",
+      "epubcheck_id": "OPF-048",
+      "message_pattern": "missing.*unique-identifier",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}
