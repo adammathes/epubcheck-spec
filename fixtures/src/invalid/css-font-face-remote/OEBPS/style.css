@@ -1,0 +1,5 @@
+@font-face {
+  font-family: 'RemoteFont';
+  src: url('https://example.com/font.woff2');
+}
+body { font-family: 'RemoteFont'; }

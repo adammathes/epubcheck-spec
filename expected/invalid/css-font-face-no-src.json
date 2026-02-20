@@ -1,0 +1,10 @@
+{
+  "fixture": "invalid/css-font-face-no-src",
+  "valid": true,
+  "messages": [],
+  "fatal_count": 0,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0,
+  "note": "epubcheck 5.3.0 does not flag @font-face rules missing a src descriptor"
+}

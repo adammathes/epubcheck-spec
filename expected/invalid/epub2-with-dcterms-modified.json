@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/epub2-with-dcterms-modified",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "E2-006",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "property.*not allowed",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}

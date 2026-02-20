@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-non-utf8-encoding",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "ENC-001",
+      "epubcheck_id": "RSC-028",
+      "message_pattern": "must be encoded in UTF-8",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

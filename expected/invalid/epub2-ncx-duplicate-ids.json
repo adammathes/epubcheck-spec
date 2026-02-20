@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/epub2-ncx-duplicate-ids",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "E2-011",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "id.*attribute.*does not have a unique value",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

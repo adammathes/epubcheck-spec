@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-manifest-href-fragment",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-033",
+      "epubcheck_id": "OPF-091",
+      "message_pattern": "must not have a fragment",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}

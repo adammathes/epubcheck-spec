@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/image-media-type-wrong",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "MED-001",
+      "epubcheck_id": "OPF-029",
+      "message_pattern": "does not appear to match the media type",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

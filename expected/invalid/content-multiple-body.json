@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-multiple-body",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "HTM-018",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "body.*not allowed here",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

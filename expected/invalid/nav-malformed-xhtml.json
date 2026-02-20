@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/nav-malformed-xhtml",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "FATAL",
+      "check_id": "NAV-011",
+      "epubcheck_id": "RSC-016",
+      "message_pattern": "must be terminated by the matching end-tag",
+      "note": ""
+    }
+  ],
+  "fatal_count": 1,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0
+}

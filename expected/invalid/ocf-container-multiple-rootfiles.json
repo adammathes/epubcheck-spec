@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/ocf-container-multiple-rootfiles",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "FATAL",
+      "check_id": "OCF-011",
+      "epubcheck_id": "OPF-002",
+      "message_pattern": "was not found",
+      "note": ""
+    }
+  ],
+  "fatal_count": 1,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0
+}

@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/epub2-ncx-uid-mismatch",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "E2-010",
+      "epubcheck_id": "NCX-001",
+      "message_pattern": "NCX identifier.*does not match OPF identifier",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

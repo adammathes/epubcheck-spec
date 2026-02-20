@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-manifest-invalid-property",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-029",
+      "epubcheck_id": "OPF-027",
+      "message_pattern": "Undefined property",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

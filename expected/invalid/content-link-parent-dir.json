@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-link-parent-dir",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "HTM-023",
+      "epubcheck_id": "RSC-026",
+      "message_pattern": "leaks outside the container",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}
