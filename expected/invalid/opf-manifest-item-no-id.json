@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-manifest-item-no-id",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-018",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "missing required attribute.*id",
+      "note": "Cascading errors from missing id attribute"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 4,
+  "error_count_min": 1,
+  "warning_count": 0
+}

@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-no-title",
+  "valid": true,
+  "messages": [
+    {
+      "severity": "WARNING",
+      "check_id": "HTM-002",
+      "epubcheck_id": "RSC-017",
+      "message_pattern": "title",
+      "note": "epubcheck reports this as a WARNING, not an ERROR"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 1
+}

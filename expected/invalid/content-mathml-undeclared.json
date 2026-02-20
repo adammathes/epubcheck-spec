@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-mathml-undeclared",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "HTM-007",
+      "epubcheck_id": "OPF-014",
+      "message_pattern": "mathml.*should be declared",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

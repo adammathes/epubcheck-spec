@@ -1,0 +1,10 @@
+{
+  "fixture": "invalid/content-empty-href",
+  "valid": true,
+  "messages": [],
+  "fatal_count": 0,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0,
+  "note": "epubcheck 5.3.0 does not flag empty href attributes. Spec requires non-empty href."
+}

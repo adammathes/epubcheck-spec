@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-duplicate-spine-idref",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-017",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "same manifest entry as a previous",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

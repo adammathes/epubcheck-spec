@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-remote-resource",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "RSC-004",
+      "epubcheck_id": "RSC-006",
+      "message_pattern": "Remote resource reference is not allowed",
+      "note": "Also triggers OPF-014 for undeclared remote-resources property"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

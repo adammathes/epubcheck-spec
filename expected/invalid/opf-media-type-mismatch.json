@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-media-type-mismatch",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-024",
+      "epubcheck_id": "OPF-029",
+      "message_pattern": "does not appear to match the media type",
+      "note": "Cascading errors from media type mismatch"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 4,
+  "error_count_min": 1,
+  "warning_count": 0
+}

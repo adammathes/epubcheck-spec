@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-missing-spine",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-014",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "missing required element.*spine",
+      "note": "Cascading errors from missing spine element"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

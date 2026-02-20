@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-resource-not-in-manifest",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "RSC-006",
+      "epubcheck_id": "RSC-008",
+      "message_pattern": "not declared in the OPF manifest",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}
