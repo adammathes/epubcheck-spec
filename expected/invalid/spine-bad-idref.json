@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/spine-bad-idref",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-009",
+      "epubcheck_id": "OPF-049",
+      "message_pattern": "nonexistent.*not found",
+      "note": "epubcheck cascades: OPF-049 + RSC-005 schema error + RSC-011"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}

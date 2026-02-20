@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/ocf-mimetype-wrong-content",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OCF-003",
+      "epubcheck_id": "PKG-007",
+      "message_pattern": "application/epub\\+zip",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

@@ -1,0 +1,10 @@
+{
+  "fixture": "invalid/zip-entry-not-in-manifest",
+  "valid": true,
+  "messages": [],
+  "fatal_count": 0,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0,
+  "note": "epubcheck 5.3.0 does not report ERROR/WARNING for files not in manifest. May report at INFO/USAGE level. OPF-003 was originally predicted."
+}

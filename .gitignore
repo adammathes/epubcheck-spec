@@ -1,0 +1,8 @@
+# Build artifacts
+fixtures/epub/
+reference/
+analysis/
+
+# OS files
+.DS_Store
+Thumbs.db

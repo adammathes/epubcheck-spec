@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/ocf-container-malformed-xml",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "FATAL",
+      "check_id": "OCF-007",
+      "epubcheck_id": "RSC-016",
+      "message_pattern": "XML document structures",
+      "note": ""
+    }
+  ],
+  "fatal_count": 1,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0
+}

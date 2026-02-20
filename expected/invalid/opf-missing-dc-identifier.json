@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-missing-dc-identifier",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-002",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "dc:identifier",
+      "note": "epubcheck cascades: schema error + OPF-030 unique-identifier not found"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}
