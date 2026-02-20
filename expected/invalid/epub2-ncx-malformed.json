@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/epub2-ncx-malformed",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "FATAL",
+      "check_id": "E2-002",
+      "epubcheck_id": "RSC-016",
+      "message_pattern": "XML document structures must start and end",
+      "note": ""
+    }
+  ],
+  "fatal_count": 1,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0
+}

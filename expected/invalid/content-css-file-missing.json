@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-css-file-missing",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "RSC-005",
+      "epubcheck_id": "RSC-001",
+      "message_pattern": "style\\.css.*could not be found",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

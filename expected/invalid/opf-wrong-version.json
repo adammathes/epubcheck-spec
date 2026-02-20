@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-wrong-version",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-015",
+      "epubcheck_id": "OPF-001",
+      "message_pattern": "version",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

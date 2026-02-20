@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/nav-multiple-toc",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "NAV-005",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "Exactly one.*toc",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

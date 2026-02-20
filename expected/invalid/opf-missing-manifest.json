@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-missing-manifest",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-013",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "missing required element.*manifest",
+      "note": "Cascading errors from missing manifest element"
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}
