@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-prefix-invalid",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-043",
+      "epubcheck_id": "OPF-004c",
+      "message_pattern": "Invalid prefix declaration",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}

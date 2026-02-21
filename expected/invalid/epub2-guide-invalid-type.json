@@ -1,0 +1,10 @@
+{
+  "fixture": "invalid/epub2-guide-invalid-type",
+  "valid": true,
+  "messages": [],
+  "fatal_count": 0,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0,
+  "note": "epubcheck 5.3.0 does not flag invalid guide reference types in EPUB 2"
+}

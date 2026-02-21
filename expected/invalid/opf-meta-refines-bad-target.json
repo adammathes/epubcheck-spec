@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-meta-refines-bad-target",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-037",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "refines missing target id",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

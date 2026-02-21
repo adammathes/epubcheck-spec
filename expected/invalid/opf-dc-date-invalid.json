@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-dc-date-invalid",
+  "valid": true,
+  "messages": [
+    {
+      "severity": "WARNING",
+      "check_id": "OPF-036",
+      "epubcheck_id": "OPF-053",
+      "message_pattern": "Date value.*does not follow recommended syntax",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 1
+}

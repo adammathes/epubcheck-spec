@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-ppd-invalid",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-035",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "page-progression-direction.*must be equal to",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

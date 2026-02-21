@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/epub2-dc-creator-bad-role",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "E2-013",
+      "epubcheck_id": "OPF-052",
+      "message_pattern": "Role value.*is not valid",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

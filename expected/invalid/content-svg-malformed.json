@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-svg-malformed",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "FATAL",
+      "check_id": "HTM-029",
+      "epubcheck_id": "RSC-016",
+      "message_pattern": "Attribute name.*associated with an element",
+      "note": ""
+    }
+  ],
+  "fatal_count": 1,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 0
+}

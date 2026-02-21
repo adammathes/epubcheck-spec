@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-no-head",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "HTM-024",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "missing required element.*head",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

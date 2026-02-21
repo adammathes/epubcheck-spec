@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/epub2-opf-wrong-order",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "E2-014",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "not allowed yet.*missing required element",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 4,
+  "error_count_min": 1,
+  "warning_count": 0
+}
