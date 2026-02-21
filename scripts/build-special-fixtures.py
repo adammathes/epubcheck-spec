@@ -94,8 +94,35 @@ def build_mimetype_extra_field():
     print(f"  Built: {out}")
 
 
+def build_manifest_duplicate_item_same_resource():
+    """Add a case-variant duplicate ZIP entry to simulate case-insensitive collision.
+
+    The manifest references both chapter1.xhtml and Chapter1.xhtml.  On a
+    case-insensitive filesystem these collapse to the same file, producing a
+    duplicate ZIP entry.  We replicate that condition here so the test works
+    correctly on the case-sensitive Linux CI filesystem too.
+    """
+    epub = os.path.join(FIXTURES_OUT, "invalid", "manifest-duplicate-item-same-resource.epub")
+    tmp = epub + ".tmp"
+
+    with zipfile.ZipFile(epub, 'r') as zin:
+        chapter1_data = zin.read("OEBPS/chapter1.xhtml")
+        with zipfile.ZipFile(tmp, 'w') as zout:
+            for item in zin.infolist():
+                zout.writestr(item, zin.read(item.filename))
+            # Insert the case-variant entry (same content, different capitalisation).
+            # epubcheck flags OPF-060 when two ZIP entries are case-insensitively equal.
+            dup = zipfile.ZipInfo("OEBPS/Chapter1.xhtml")
+            dup.compress_type = zipfile.ZIP_DEFLATED
+            zout.writestr(dup, chapter1_data)
+
+    os.replace(tmp, epub)
+    print(f"  Built: {epub}")
+
+
 if __name__ == "__main__":
     build_mimetype_not_first()
     build_mimetype_compressed()
     build_mimetype_extra_field()
+    build_manifest_duplicate_item_same_resource()
     print("Special fixtures built.")
