@@ -1,4 +1,4 @@
-# Project: epubcheck-spec — Language-Independent EPUB Validation Test Suite
+# Project: epubverify-spec — Language-Independent EPUB Validation Test Suite
 
 ## Goal
 
@@ -40,7 +40,7 @@ Run `./bootstrap.sh` first — it installs Java, reference epubcheck, test data,
 ## Architecture
 
 ```
-epubcheck-spec/
+epubverify-spec/
 ├── bootstrap.sh
 ├── checks.json                     # Machine-readable registry of ALL checks
 ├── fixtures/

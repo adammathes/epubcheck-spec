@@ -1,4 +1,4 @@
-# epubcheck-spec
+# epubverify-spec
 
 A language-independent, machine-readable test suite for EPUB validation. Any implementation (Go, Rust, Zig, C, etc.) can test against this suite to verify correctness. All fixtures are validated against the reference Java [epubcheck](https://github.com/w3c/epubcheck) to ensure accuracy.
 
@@ -52,7 +52,7 @@ make verify             # Verify expected output matches reference
 ## Project Structure
 
 ```
-epubcheck-spec/
+epubverify-spec/
 ├── checks.json                 # Machine-readable registry of all checks
 ├── fixtures/
 │   ├── src/                    # Human-readable source for each test EPUB
