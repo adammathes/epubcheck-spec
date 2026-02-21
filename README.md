@@ -4,7 +4,11 @@ A language-independent, machine-readable test suite for EPUB validation. Any imp
 
 ## Why
 
-Building a native EPUB validator to replace the Java-only W3C epubcheck requires a rock-solid test suite that:
+Currently there is a great Java valitor from the W3C -- epubcheck. This project is not in any way affiliated with that.
+
+This is an AI assisted coding experiment to see how far AI agents can get in making working versions in other languages with different tradeoffs than Java that might run faster.
+
+Building an EPUB validator requires a test suite that:
 
 - Defines exactly what "correct" validation means
 - Is validated against the reference Java implementation
@@ -12,7 +16,7 @@ Building a native EPUB validator to replace the Java-only W3C epubcheck requires
 - Tracks which spec requirements are covered
 - Prioritizes checks by real-world frequency
 
-The test suite is the hard part. The implementation is just making tests pass.
+The test suite is a hard part. Then AI agentscan do the implementation by making tests pass.
 
 ## Maturity Levels
 
