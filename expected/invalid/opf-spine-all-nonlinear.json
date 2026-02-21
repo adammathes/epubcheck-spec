@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-spine-all-nonlinear",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "OPF-041",
+      "epubcheck_id": "OPF-033",
+      "message_pattern": "spine contains no linear resources",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

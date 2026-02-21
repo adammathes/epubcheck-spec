@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/opf-uuid-invalid",
+  "valid": true,
+  "messages": [
+    {
+      "severity": "WARNING",
+      "check_id": "OPF-040",
+      "epubcheck_id": "OPF-085",
+      "message_pattern": "UUID.*invalid",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 0,
+  "error_count_min": null,
+  "warning_count": 1
+}
