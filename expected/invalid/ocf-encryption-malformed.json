@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/ocf-encryption-malformed",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "FATAL",
+      "check_id": "OCF-013",
+      "epubcheck_id": "RSC-016",
+      "message_pattern": "must be followed by the .* character",
+      "note": ""
+    }
+  ],
+  "fatal_count": 1,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

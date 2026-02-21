@@ -1126,3 +1126,161 @@ create_fixture("media-overlay-no-property", {
 })
 
 print(f"\nDone! Created Batch 4 (Media Overlays) fixtures.")
+
+# ============================================================================
+# BATCH 5: Container & EPUB 2 Edge Cases
+# ============================================================================
+print("\n=== Batch 5: Container & EPUB 2 Edge Cases ===")
+
+# OCF-013: encryption.xml that is malformed XML
+create_fixture("ocf-encryption-malformed", {
+    "META-INF/encryption.xml": """<?xml version="1.0" encoding="UTF-8"?>
+<encryption xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <EncryptedData>
+    <this is malformed
+  </EncryptedData>
+</encryption>""",
+})
+
+# OCF-014: container.xml with invalid version attribute
+create_fixture("ocf-container-bad-version", {
+    "META-INF/container.xml": """<?xml version="1.0" encoding="UTF-8"?>
+<container version="2.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
+  </rootfiles>
+</container>""",
+})
+
+# OCF-015: filename with restricted characters (backslash)
+create_fixture("ocf-filename-invalid-chars", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+    <item id="extra" href="file%00name.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# OCF-016: filename that is excessively long (> 65535 bytes)
+# Create a filename just over the limit
+LONG_NAME = "a" * 200 + ".xhtml"
+create_fixture("ocf-filename-too-long", {
+    "OEBPS/content.opf": f"""<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+    <item id="longfile" href="{LONG_NAME}" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    f"OEBPS/{LONG_NAME}": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Long Name</title></head>
+<body><p>File with a very long name.</p></body>
+</html>""",
+})
+
+# E2-012: EPUB 2 with invalid guide reference type
+create_fixture("epub2-guide-invalid-type", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+  </metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="chapter1"/>
+  </spine>
+  <guide>
+    <reference type="not-a-valid-type" title="Bad" href="chapter1.xhtml"/>
+  </guide>
+</package>""",
+}, base="epub2")
+
+# E2-013: EPUB 2 with invalid MARC relator role on dc:creator
+create_fixture("epub2-dc-creator-bad-role", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <dc:creator opf:role="xyz">Test Author</dc:creator>
+  </metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+}, base="epub2")
+
+# E2-014: EPUB 2 OPF elements in wrong order (spine before manifest)
+create_fixture("epub2-opf-wrong-order", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+  </metadata>
+  <spine toc="ncx">
+    <itemref idref="chapter1"/>
+  </spine>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+</package>""",
+}, base="epub2")
+
+# E2-015: EPUB 2 NCX with depth mismatch (says 2, but actual depth is 1)
+create_fixture("epub2-ncx-depth-mismatch", {
+    "OEBPS/toc.ncx": """<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:12345678-1234-1234-1234-123456789012"/>
+    <meta name="dtb:depth" content="3"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle><text>Test Book</text></docTitle>
+  <navMap>
+    <navPoint id="np-1" playOrder="1">
+      <navLabel><text>Chapter 1</text></navLabel>
+      <content src="chapter1.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>""",
+}, base="epub2")
+
+print(f"\nDone! Created Batch 5 (Container & EPUB 2 Edge Cases) fixtures.")

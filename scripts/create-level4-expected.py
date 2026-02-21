@@ -250,6 +250,54 @@ LEVEL4_CHECKS = {
         "message_pattern": "Media Overlay Document referenced",
         "error_count_min": 1,
     },
+
+    # === Batch 5: Container & EPUB 2 Edge Cases ===
+    "ocf-encryption-malformed": {
+        "check_id": "OCF-013",
+        "epubcheck_id": "RSC-016",
+        "severity": "FATAL",
+        "message_pattern": "must be followed by the .* character",
+    },
+    "ocf-container-bad-version": {
+        "check_id": "OCF-014",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "version.*must be equal to",
+    },
+    "ocf-filename-invalid-chars": {
+        "check_id": "OCF-015",
+        "epubcheck_id": "RSC-001",
+        "severity": "ERROR",
+        "message_pattern": "could not be found",
+    },
+    "ocf-filename-too-long": {
+        "check_id": "OCF-016",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag excessively long filenames",
+    },
+    "epub2-guide-invalid-type": {
+        "check_id": "E2-012",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag invalid guide reference types in EPUB 2",
+    },
+    "epub2-dc-creator-bad-role": {
+        "check_id": "E2-013",
+        "epubcheck_id": "OPF-052",
+        "severity": "ERROR",
+        "message_pattern": "Role value.*is not valid",
+    },
+    "epub2-opf-wrong-order": {
+        "check_id": "E2-014",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "not allowed yet.*missing required element",
+        "error_count_min": 1,
+    },
+    "epub2-ncx-depth-mismatch": {
+        "check_id": "E2-015",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag NCX depth metadata mismatch",
+    },
 }
 
 
