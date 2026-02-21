@@ -2,9 +2,14 @@
 
 A language-independent, machine-readable test suite for EPUB validation. Any implementation (Go, Rust, Zig, C, etc.) can test against this suite to verify correctness. All fixtures are validated against the reference Java [epubcheck](https://github.com/w3c/epubcheck) to ensure accuracy.
 
+## ⚠️ WARNING: Vibecoded Experiment
+
+**This is an experimental project created as a vibecoded experiment. It is not production-ready and is not used anywhere yet. Use at your own risk.**
+
+
 ## Why
 
-Currently there is a great Java valitor from the W3C -- epubcheck. This project is not in any way affiliated with that.
+Currently there is a great Java validator from the W3C -- epubcheck. This project is not in any way affiliated with that.
 
 This is an AI assisted coding experiment to see how far AI agents can get in making working versions in other languages with different tradeoffs than Java that might run faster.
 
@@ -16,7 +21,7 @@ Building an EPUB validator requires a test suite that:
 - Tracks which spec requirements are covered
 - Prioritizes checks by real-world frequency
 
-The test suite is a hard part. Then AI agentscan do the implementation by making tests pass.
+The test suite is a hard part. Then AI agents can do the implementation by making tests pass.
 
 ## Maturity Levels
 
@@ -24,9 +29,9 @@ Every check in the registry is assigned a level representing implementation prio
 
 | Level | Name | Checks | Description |
 |-------|------|--------|-------------|
-| 1 | Catches pandoc problems | ~26 | Container structure, basic OPF, manifest/spine cross-refs, required metadata |
-| 2 | Daily driver | ~42 | Full resource validation, fallback chains, content well-formedness, EPUB 2 basics |
-| 3 | Production validator | ~55 | CSS validation, navigation edge cases, fixed-layout, encoding, image validation |
+| 1 | Catches pandoc problems | 26 | Container structure, basic OPF, manifest/spine cross-refs, required metadata |
+| 2 | Daily driver | 42 | Full resource validation, fallback chains, content well-formedness, EPUB 2 basics |
+| 3 | Production validator | 55 | CSS validation, navigation edge cases, fixed-layout, encoding, image validation |
 | 4 | Full conformance | TBD | Accessibility, encryption, media overlays, dictionaries, deep HTML5 validation |
 
 Currently 123 checks are defined across Levels 1-3, covering 10 categories:
@@ -156,6 +161,27 @@ This runs your tool on every fixture and compares results against `expected/`. O
 5. **Comparison is against expected/, not reference/.** This allows intentional divergence when warranted.
 6. **Frequency drives priority.** After Level 1, real-world data determines what matters most.
 7. **Every fixture validated against reference before commit.** Reference epubcheck is ground truth.
+
+## CI
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push and pull request:
+
+| Job | What it checks | Dependencies |
+|-----|---------------|--------------|
+| `validate-json` | All `.json` files are valid JSON | `jq` |
+| `build-and-verify` | Fixtures build cleanly; expected output matches epubcheck reference | Java 17, epubcheck 5.3.0, `jq`, `zip`, `python3` |
+
+The build-and-verify job catches two classes of problems:
+- A fixture source directory that can't be zipped into a valid EPUB
+- An `expected/` file that no longer matches what epubcheck 5.3.0 actually reports
+
+To run the same checks locally:
+
+```bash
+make build              # Build all fixture EPUBs
+make reference          # Run epubcheck on every fixture
+make verify             # Diff expected/ against reference/
+```
 
 ## License
 

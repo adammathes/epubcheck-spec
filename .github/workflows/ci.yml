@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-json:
+    name: Validate JSON
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate checks.json
+        run: jq empty checks.json
+
+      - name: Validate expected JSON files
+        run: |
+          find expected/ -name '*.json' | sort | while read f; do
+            jq empty "$f" || { echo "INVALID JSON: $f"; exit 1; }
+          done
+          echo "All expected JSON files are valid."
+
+  build-and-verify:
+    name: Build & Verify
+    runs-on: ubuntu-latest
+    env:
+      EPUBCHECK_VERSION: 5.3.0
+      EPUBCHECK_JAR: ${{ github.workspace }}/tools/epubcheck-5.3.0/epubcheck.jar
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install dependencies
+        run: sudo apt-get install -y jq zip python3
+
+      - name: Download epubcheck
+        run: |
+          mkdir -p tools
+          curl -fsSL \
+            "https://github.com/w3c/epubcheck/releases/download/v${EPUBCHECK_VERSION}/epubcheck-${EPUBCHECK_VERSION}.zip" \
+            -o /tmp/epubcheck.zip
+          unzip -q /tmp/epubcheck.zip -d tools/
+
+      - name: Build fixtures
+        run: make build
+
+      - name: Generate reference output
+        run: make reference
+
+      - name: Verify expected matches reference
+        run: make verify
