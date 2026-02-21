@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/media-overlay-audio-missing",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "MED-007",
+      "epubcheck_id": "RSC-007",
+      "message_pattern": "could not be found",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

@@ -791,3 +791,338 @@ create_fixture("acc-no-landmarks", {
 })
 
 print(f"\nDone! Created Batch 3 (Accessibility) fixtures.")
+
+
+# ============================================================================
+# BATCH 4: Media Overlays
+# ============================================================================
+print("\n=== Batch 4: Media Overlays ===")
+
+# Minimal valid MP3 header (silence, valid MPEG audio frame header)
+MINIMAL_MP3 = b'\xff\xfb\x90\x00' + b'\x00' * 417
+
+# MED-006: Malformed SMIL media overlay
+create_fixture("media-overlay-malformed", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="media:duration" refines="#ch1overlay">0:00:01.000</meta>
+    <meta property="media:duration">0:00:01.000</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" media-overlay="ch1overlay"/>
+    <item id="ch1overlay" href="chapter1.smil" media-type="application/smil+xml"/>
+    <item id="audio1" href="audio.mp3" media-type="audio/mpeg"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.smil": """<?xml version="1.0" encoding="UTF-8"?>
+<smil xmlns="http://www.w3.org/ns/SMIL" version="3.0">
+  <body>
+    <seq>
+      <par>
+        <text src="chapter1.xhtml#p1"
+        <audio src="audio.mp3" clipBegin="0s" clipEnd="1s"/>
+      </par>
+    </seq>
+  </body>
+</smil>""",
+    "OEBPS/audio.mp3": MINIMAL_MP3,
+})
+
+# MED-007: Audio file referenced in overlay doesn't exist
+create_fixture("media-overlay-audio-missing", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="media:duration" refines="#ch1overlay">0:00:01.000</meta>
+    <meta property="media:duration">0:00:01.000</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" media-overlay="ch1overlay"/>
+    <item id="ch1overlay" href="chapter1.smil" media-type="application/smil+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.smil": """<?xml version="1.0" encoding="UTF-8"?>
+<smil xmlns="http://www.w3.org/ns/SMIL" version="3.0">
+  <body>
+    <seq>
+      <par>
+        <text src="chapter1.xhtml#p1"/>
+        <audio src="nonexistent-audio.mp3" clipBegin="0s" clipEnd="1s"/>
+      </par>
+    </seq>
+  </body>
+</smil>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p id="p1">Hello, world.</p>
+</body>
+</html>""",
+})
+
+# MED-008: Text ref in overlay points to nonexistent fragment
+create_fixture("media-overlay-text-missing", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="media:duration" refines="#ch1overlay">0:00:01.000</meta>
+    <meta property="media:duration">0:00:01.000</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" media-overlay="ch1overlay"/>
+    <item id="ch1overlay" href="chapter1.smil" media-type="application/smil+xml"/>
+    <item id="audio1" href="audio.mp3" media-type="audio/mpeg"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.smil": """<?xml version="1.0" encoding="UTF-8"?>
+<smil xmlns="http://www.w3.org/ns/SMIL" version="3.0">
+  <body>
+    <seq>
+      <par>
+        <text src="chapter1.xhtml#nonexistent-id"/>
+        <audio src="audio.mp3" clipBegin="0s" clipEnd="1s"/>
+      </par>
+    </seq>
+  </body>
+</smil>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p id="p1">Hello, world.</p>
+</body>
+</html>""",
+    "OEBPS/audio.mp3": MINIMAL_MP3,
+})
+
+# MED-009: Media overlay present but no duration metadata
+create_fixture("media-overlay-no-duration", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" media-overlay="ch1overlay"/>
+    <item id="ch1overlay" href="chapter1.smil" media-type="application/smil+xml"/>
+    <item id="audio1" href="audio.mp3" media-type="audio/mpeg"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.smil": """<?xml version="1.0" encoding="UTF-8"?>
+<smil xmlns="http://www.w3.org/ns/SMIL" version="3.0">
+  <body>
+    <seq>
+      <par>
+        <text src="chapter1.xhtml#p1"/>
+        <audio src="audio.mp3" clipBegin="0s" clipEnd="1s"/>
+      </par>
+    </seq>
+  </body>
+</smil>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p id="p1">Hello, world.</p>
+</body>
+</html>""",
+    "OEBPS/audio.mp3": MINIMAL_MP3,
+})
+
+# MED-010: Invalid SMIL clock value in clipBegin/clipEnd
+create_fixture("media-overlay-clip-invalid", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="media:duration" refines="#ch1overlay">0:00:01.000</meta>
+    <meta property="media:duration">0:00:01.000</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" media-overlay="ch1overlay"/>
+    <item id="ch1overlay" href="chapter1.smil" media-type="application/smil+xml"/>
+    <item id="audio1" href="audio.mp3" media-type="audio/mpeg"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.smil": """<?xml version="1.0" encoding="UTF-8"?>
+<smil xmlns="http://www.w3.org/ns/SMIL" version="3.0">
+  <body>
+    <seq>
+      <par>
+        <text src="chapter1.xhtml#p1"/>
+        <audio src="audio.mp3" clipBegin="not-a-time" clipEnd="also-invalid"/>
+      </par>
+    </seq>
+  </body>
+</smil>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p id="p1">Hello, world.</p>
+</body>
+</html>""",
+    "OEBPS/audio.mp3": MINIMAL_MP3,
+})
+
+# MED-011: SMIL with invalid structure (missing seq/par)
+create_fixture("media-overlay-bad-structure", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="media:duration" refines="#ch1overlay">0:00:01.000</meta>
+    <meta property="media:duration">0:00:01.000</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" media-overlay="ch1overlay"/>
+    <item id="ch1overlay" href="chapter1.smil" media-type="application/smil+xml"/>
+    <item id="audio1" href="audio.mp3" media-type="audio/mpeg"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.smil": """<?xml version="1.0" encoding="UTF-8"?>
+<smil xmlns="http://www.w3.org/ns/SMIL" version="3.0">
+  <body>
+    <text src="chapter1.xhtml#p1"/>
+    <audio src="audio.mp3" clipBegin="0s" clipEnd="1s"/>
+  </body>
+</smil>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p id="p1">Hello, world.</p>
+</body>
+</html>""",
+    "OEBPS/audio.mp3": MINIMAL_MP3,
+})
+
+# MED-012: Video with non-core media type and no fallback
+create_fixture("video-non-core-type", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+    <item id="vid1" href="clip.avi" media-type="video/x-msvideo"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p><video src="clip.avi">Video</video></p>
+</body>
+</html>""",
+    "OEBPS/clip.avi": b'RIFF\x00\x00\x00\x00AVI ',
+})
+
+# MED-013: media-overlay property declared but item is wrong type
+create_fixture("media-overlay-no-property", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="media:duration" refines="#ch1overlay">0:00:01.000</meta>
+    <meta property="media:duration">0:00:01.000</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" media-overlay="ch1overlay"/>
+    <item id="ch1overlay" href="chapter1_overlay.xhtml" media-type="application/xhtml+xml"/>
+    <item id="audio1" href="audio.mp3" media-type="audio/mpeg"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1_overlay.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Not a SMIL file</title></head>
+<body><p>This is not a media overlay</p></body>
+</html>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p id="p1">Hello, world.</p>
+</body>
+</html>""",
+    "OEBPS/audio.mp3": MINIMAL_MP3,
+})
+
+print(f"\nDone! Created Batch 4 (Media Overlays) fixtures.")

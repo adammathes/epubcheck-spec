@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/media-overlay-no-property",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "MED-013",
+      "epubcheck_id": "MED_013",
+      "message_pattern": "Media Overlay Document referenced",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}

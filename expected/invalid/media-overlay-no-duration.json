@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/media-overlay-no-duration",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "MED-009",
+      "epubcheck_id": "RSC-005",
+      "message_pattern": "global media:duration meta element not set",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 3,
+  "error_count_min": 1,
+  "warning_count": 0
+}

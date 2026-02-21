@@ -194,6 +194,62 @@ LEVEL4_CHECKS = {
         "valid_override": True,
         "note": "epubcheck 5.3.0 does not flag missing landmarks navigation",
     },
+
+    # === Batch 4: Media Overlays ===
+    "media-overlay-malformed": {
+        "check_id": "MED-006",
+        "epubcheck_id": "RSC-016",
+        "severity": "FATAL",
+        "message_pattern": "must be followed by either attribute specifications",
+        "error_count_min": 1,
+    },
+    "media-overlay-audio-missing": {
+        "check_id": "MED-007",
+        "epubcheck_id": "RSC-007",
+        "severity": "ERROR",
+        "message_pattern": "could not be found",
+        "error_count_min": 1,
+    },
+    "media-overlay-text-missing": {
+        "check_id": "MED-008",
+        "epubcheck_id": "RSC-012",
+        "severity": "ERROR",
+        "message_pattern": "Fragment identifier is not defined",
+        "error_count_min": 1,
+    },
+    "media-overlay-no-duration": {
+        "check_id": "MED-009",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "global media:duration meta element not set",
+        "error_count_min": 1,
+    },
+    "media-overlay-clip-invalid": {
+        "check_id": "MED-010",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "clipBegin.*is invalid",
+        "error_count_min": 1,
+    },
+    "media-overlay-bad-structure": {
+        "check_id": "MED-011",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "not allowed here.*expected element",
+        "error_count_min": 1,
+    },
+    "video-non-core-type": {
+        "check_id": "MED-012",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag video/x-msvideo as non-core media type",
+    },
+    "media-overlay-no-property": {
+        "check_id": "MED-013",
+        "epubcheck_id": "MED_013",
+        "severity": "ERROR",
+        "message_pattern": "Media Overlay Document referenced",
+        "error_count_min": 1,
+    },
 }
 
 

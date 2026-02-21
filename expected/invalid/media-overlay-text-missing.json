@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/media-overlay-text-missing",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "MED-008",
+      "epubcheck_id": "RSC-012",
+      "message_pattern": "Fragment identifier is not defined",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 2,
+  "error_count_min": 1,
+  "warning_count": 0
+}
