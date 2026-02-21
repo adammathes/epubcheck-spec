@@ -1,0 +1,17 @@
+{
+  "fixture": "invalid/content-ssml-invalid-ns",
+  "valid": false,
+  "messages": [
+    {
+      "severity": "ERROR",
+      "check_id": "HTM-031",
+      "epubcheck_id": "HTM_054",
+      "message_pattern": "Custom attribute namespace.*must not include",
+      "note": ""
+    }
+  ],
+  "fatal_count": 0,
+  "error_count": 1,
+  "error_count_min": null,
+  "warning_count": 0
+}

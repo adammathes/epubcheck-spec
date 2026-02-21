@@ -369,3 +369,199 @@ create_fixture("opf-media-overlay-bad-ref", {
 
 
 print(f"\nDone! Created Batch 1 (Advanced OPF & Metadata) fixtures.")
+
+
+# ============================================================================
+# BATCH 2: Advanced Content Document Checks
+# ============================================================================
+print("\n=== Batch 2: Advanced Content Documents ===")
+
+# HTM-024: Content document with no head element
+create_fixture("content-no-head", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<body>
+  <h1>Chapter 1</h1>
+  <p>Hello, world.</p>
+</body>
+</html>""",
+})
+
+# HTM-025: embed element in content document
+create_fixture("content-embed-element", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <embed src="plugin.swf" type="application/x-shockwave-flash"/>
+</body>
+</html>""",
+})
+
+# HTM-026: lang and xml:lang mismatch
+create_fixture("content-lang-mismatch", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="fr">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p>Hello, world.</p>
+</body>
+</html>""",
+})
+
+# HTM-027: video element with poster pointing to nonexistent file
+create_fixture("content-video-poster-missing", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <video poster="nonexistent-poster.jpg" src="video.mp4">Video</video>
+</body>
+</html>""",
+})
+
+# HTM-028: audio element with src pointing to nonexistent file
+create_fixture("content-audio-missing", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <audio src="nonexistent-audio.mp3">Audio</audio>
+</body>
+</html>""",
+})
+
+# HTM-029: Inline SVG that is malformed
+create_fixture("content-svg-malformed", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml" properties="svg"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+    <rect width="100" height="100" invalid-attr-no-value/>
+  </svg>
+</body>
+</html>""",
+})
+
+# HTM-030: img element with empty src attribute
+create_fixture("content-img-empty-src", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p><img src="" alt="Empty source"/></p>
+</body>
+</html>""",
+})
+
+# HTM-031: SSML namespace used incorrectly
+create_fixture("content-ssml-invalid-ns", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ssml="http://www.w3.org/2001/10/synthesis-WRONG">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p ssml:ph="test">Hello, world.</p>
+</body>
+</html>""",
+})
+
+# HTM-032: inline style element with CSS syntax error
+create_fixture("content-style-syntax-error", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Chapter 1</title>
+  <style type="text/css">
+    body { color: ; }
+    p { font-size }
+  </style>
+</head>
+<body>
+  <h1>Chapter 1</h1>
+  <p>Hello, world.</p>
+</body>
+</html>""",
+})
+
+# HTM-033: RDF metadata in content document
+create_fixture("content-rdf-element", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Chapter 1</title>
+  <meta name="rdf:about" content="test"/>
+</head>
+<body>
+  <h1>Chapter 1</h1>
+  <p>Hello, world.</p>
+</body>
+</html>""",
+})
+
+print(f"\nDone! Created Batch 2 (Advanced Content Documents) fixtures.")

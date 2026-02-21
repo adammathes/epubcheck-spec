@@ -79,6 +79,69 @@ LEVEL4_CHECKS = {
         "message_pattern": "Media Overlay Document referenced",
         "error_count_min": 1,
     },
+
+    # === Batch 2: Advanced Content Documents ===
+    "content-no-head": {
+        "check_id": "HTM-024",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "missing required element.*head",
+    },
+    "content-embed-element": {
+        "check_id": "HTM-025",
+        "epubcheck_id": "RSC-007",
+        "severity": "ERROR",
+        "message_pattern": "could not be found",
+    },
+    "content-lang-mismatch": {
+        "check_id": "HTM-026",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "lang and xml:lang.*must have the same value",
+    },
+    "content-video-poster-missing": {
+        "check_id": "HTM-027",
+        "epubcheck_id": "RSC-007",
+        "severity": "ERROR",
+        "message_pattern": "could not be found",
+        "error_count_min": 1,
+    },
+    "content-audio-missing": {
+        "check_id": "HTM-028",
+        "epubcheck_id": "RSC-007",
+        "severity": "ERROR",
+        "message_pattern": "could not be found",
+    },
+    "content-svg-malformed": {
+        "check_id": "HTM-029",
+        "epubcheck_id": "RSC-016",
+        "severity": "FATAL",
+        "message_pattern": "Attribute name.*associated with an element",
+    },
+    "content-img-empty-src": {
+        "check_id": "HTM-030",
+        "epubcheck_id": "RSC-005",
+        "severity": "ERROR",
+        "message_pattern": "src.*is invalid.*must be a string with length",
+    },
+    "content-ssml-invalid-ns": {
+        "check_id": "HTM-031",
+        "epubcheck_id": "HTM_054",
+        "severity": "ERROR",
+        "message_pattern": "Custom attribute namespace.*must not include",
+    },
+    "content-style-syntax-error": {
+        "check_id": "HTM-032",
+        "epubcheck_id": "CSS-008",
+        "severity": "ERROR",
+        "message_pattern": "error occurred while parsing the CSS",
+        "error_count_min": 1,
+    },
+    "content-rdf-element": {
+        "check_id": "HTM-033",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag RDF metadata in content documents",
+    },
 }
 
 
