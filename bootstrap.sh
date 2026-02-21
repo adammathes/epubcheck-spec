@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# bootstrap.sh — Set up dev environment for epubcheck-spec and implementations
+# bootstrap.sh — Set up dev environment for epubverify-spec and implementations
 #
 # Works in: Claude Code VMs (Ubuntu 24), local Ubuntu 22/24, Debian 12+
 # Usage: ./bootstrap.sh [--with-go] [--with-rust] [--all]
