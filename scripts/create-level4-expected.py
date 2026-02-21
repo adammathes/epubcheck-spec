@@ -142,6 +142,58 @@ LEVEL4_CHECKS = {
         "valid_override": True,
         "note": "epubcheck 5.3.0 does not flag RDF metadata in content documents",
     },
+
+    # === Batch 3: Accessibility ===
+    "acc-no-a11y-metadata": {
+        "check_id": "ACC-001",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing accessibility metadata without --profile option",
+    },
+    "acc-img-no-alt": {
+        "check_id": "ACC-002",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag img elements missing alt attribute",
+    },
+    "acc-no-lang": {
+        "check_id": "ACC-003",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing lang attribute on html element",
+    },
+    "acc-dc-source-no-page-list": {
+        "check_id": "ACC-004",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing page-list when dc:source is present",
+    },
+    "acc-no-accessmode": {
+        "check_id": "ACC-005",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing schema:accessMode metadata",
+    },
+    "acc-no-access-sufficient": {
+        "check_id": "ACC-006",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing schema:accessModeSufficient metadata",
+    },
+    "acc-no-summary": {
+        "check_id": "ACC-007",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing schema:accessibilitySummary metadata",
+    },
+    "acc-no-feature": {
+        "check_id": "ACC-008",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing schema:accessibilityFeature metadata",
+    },
+    "acc-no-hazard": {
+        "check_id": "ACC-009",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing schema:accessibilityHazard metadata",
+    },
+    "acc-no-landmarks": {
+        "check_id": "ACC-010",
+        "valid_override": True,
+        "note": "epubcheck 5.3.0 does not flag missing landmarks navigation",
+    },
 }
 
 

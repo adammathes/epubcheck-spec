@@ -565,3 +565,229 @@ create_fixture("content-rdf-element", {
 })
 
 print(f"\nDone! Created Batch 2 (Advanced Content Documents) fixtures.")
+
+
+# ============================================================================
+# BATCH 3: Accessibility Checks
+# ============================================================================
+print("\n=== Batch 3: Accessibility (ACC) ===")
+
+# ACC-001: No accessibility metadata at all
+create_fixture("acc-no-a11y-metadata", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# ACC-002: Image without alt attribute
+create_fixture("acc-img-no-alt", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+    <item id="img1" href="cover.png" media-type="image/png"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p><img src="cover.png"/></p>
+</body>
+</html>""",
+    "OEBPS/cover.png": b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDATx\x9cc\xf8\x0f\x00\x00\x01\x01\x00\x05\x18\xd8N\x00\x00\x00\x00IEND\xaeB`\x82',
+})
+
+# ACC-003: Content document html element missing lang attribute
+create_fixture("acc-no-lang", {
+    "OEBPS/chapter1.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Chapter 1</title></head>
+<body>
+  <h1>Chapter 1</h1>
+  <p>Hello, world.</p>
+</body>
+</html>""",
+})
+
+# ACC-004: dc:source present but no page-list navigation
+create_fixture("acc-dc-source-no-page-list", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <dc:source>urn:isbn:9780123456789</dc:source>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# ACC-005: Missing schema:accessMode metadata
+create_fixture("acc-no-accessmode", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid"
+         prefix="schema: http://schema.org/">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="schema:accessibilitySummary">No accessibility features</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# ACC-006: Missing schema:accessModeSufficient metadata
+create_fixture("acc-no-access-sufficient", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid"
+         prefix="schema: http://schema.org/">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="schema:accessMode">textual</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# ACC-007: Missing schema:accessibilitySummary metadata
+create_fixture("acc-no-summary", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid"
+         prefix="schema: http://schema.org/">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="schema:accessMode">textual</meta>
+    <meta property="schema:accessModeSufficient">textual</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# ACC-008: Missing schema:accessibilityFeature metadata
+create_fixture("acc-no-feature", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid"
+         prefix="schema: http://schema.org/">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="schema:accessMode">textual</meta>
+    <meta property="schema:accessModeSufficient">textual</meta>
+    <meta property="schema:accessibilitySummary">Test summary</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# ACC-009: Missing schema:accessibilityHazard metadata
+create_fixture("acc-no-hazard", {
+    "OEBPS/content.opf": """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid"
+         prefix="schema: http://schema.org/">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">urn:uuid:12345678-1234-1234-1234-123456789012</dc:identifier>
+    <dc:title>Test Book</dc:title>
+    <dc:language>en</dc:language>
+    <meta property="dcterms:modified">2025-01-01T00:00:00Z</meta>
+    <meta property="schema:accessMode">textual</meta>
+    <meta property="schema:accessModeSufficient">textual</meta>
+    <meta property="schema:accessibilitySummary">Test summary</meta>
+    <meta property="schema:accessibilityFeature">structuralNavigation</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="chapter1" href="chapter1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="chapter1"/>
+  </spine>
+</package>""",
+})
+
+# ACC-010: No landmarks navigation
+create_fixture("acc-no-landmarks", {
+    "OEBPS/nav.xhtml": """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head><title>Navigation</title></head>
+<body>
+  <nav epub:type="toc">
+    <h1>Table of Contents</h1>
+    <ol>
+      <li><a href="chapter1.xhtml">Chapter 1</a></li>
+    </ol>
+  </nav>
+</body>
+</html>""",
+})
+
+print(f"\nDone! Created Batch 3 (Accessibility) fixtures.")
