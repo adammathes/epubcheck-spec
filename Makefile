@@ -1,6 +1,6 @@
 EPUBCHECK_JAR ?= $(HOME)/tools/epubcheck-5.3.0/epubcheck.jar
 
-.PHONY: all build reference verify compare parity discover frequency corpus clean help
+.PHONY: all build reference verify compare parity discover frequency corpus analyze clean help
 
 all: build reference verify
 
@@ -27,6 +27,9 @@ frequency:                          ## Rank checks by real-world frequency
 
 corpus:                             ## Download real-world epub corpus
 	./scripts/fetch-corpus.sh
+
+analyze:                            ## Run epubcheck on corpus and produce summary
+	./scripts/analyze-corpus.sh
 
 clean:                              ## Remove generated files
 	rm -rf fixtures/epub/ reference/ analysis/

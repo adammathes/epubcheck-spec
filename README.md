@@ -32,20 +32,21 @@ Every check in the registry is assigned a level representing implementation prio
 | 1 | Catches pandoc problems | 26 | Container structure, basic OPF, manifest/spine cross-refs, required metadata |
 | 2 | Daily driver | 42 | Full resource validation, fallback chains, content well-formedness, EPUB 2 basics |
 | 3 | Production validator | 55 | CSS validation, navigation edge cases, fixed-layout, encoding, image validation |
-| 4 | Full conformance | TBD | Accessibility, encryption, media overlays, dictionaries, deep HTML5 validation |
+| 4 | Full conformance | 46 | Accessibility, media overlays, advanced OPF/content, EPUB 2 edge cases |
 
-Currently 123 checks are defined across Levels 1-3, covering 10 categories:
+Currently 169 checks are defined across Levels 1-4, covering 11 categories:
 
 ```
-OPF  34    Package document
-HTM  22    HTML content documents
+OPF  46    Package document
+HTM  32    HTML content documents
+PKG  16    Container/zip structure
 RSC  13    Resource references
-PKG  12    Container/zip structure
+NCX  13    EPUB 2 NCX
+MED  13    Media types & overlays
 NAV  11    Navigation documents
-NCX  11    EPUB 2 NCX
+ACC  10    Accessibility
 CSS   8    CSS validation
 FXL   5    Fixed-layout
-MED   5    Media types & overlays
 ENC   2    Encoding & characters
 ```
 
@@ -65,8 +66,8 @@ epubverify-spec/
 ├── checks.json                 # Machine-readable registry of all checks
 ├── fixtures/
 │   ├── src/                    # Human-readable source for each test EPUB
-│   │   ├── valid/              # 4 valid EPUBs (epub3, epub2, fxl, css)
-│   │   └── invalid/            # 121 invalid EPUBs, one defect each
+│   │   ├── valid/              # 8 valid EPUBs (epub3, epub2, fxl, css, svg, images, multi-chapter, media-overlay)
+│   │   └── invalid/            # 167 invalid EPUBs, one defect each
 │   └── epub/                   # Built .epub zips (generated, gitignored)
 ├── expected/                   # Curated expected validation results
 │   ├── valid/*.json
@@ -137,6 +138,7 @@ fixtures/src/  →  build  →  fixtures/epub/  →  epubcheck  →  reference/
 | `make compare IMPL=./tool` | Compare an implementation against expected |
 | `make parity IMPL=./tool` | Generate parity report for an implementation |
 | `make corpus` | Download real-world EPUB corpus |
+| `make analyze` | Run epubcheck on corpus, produce summary and frequency report |
 | `make discover` | Discover all check IDs via corpus analysis |
 | `make frequency` | Rank checks by real-world frequency |
 | `make clean` | Remove generated files |

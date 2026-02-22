@@ -1,0 +1,49 @@
+{
+  "_comment": "Maps real-world EPUBs from the corpus to their known validation issues. Used to track which checks fire on real-world content and to detect regressions when upgrading epubcheck or modifying the check registry.",
+  "_schema_version": 1,
+  "sources": {
+    "standard-ebooks": {
+      "description": "Standard Ebooks: high-quality, well-structured EPUB 3 files. Should validate cleanly.",
+      "expect_clean": true,
+      "known_issues": {}
+    },
+    "gutenberg": {
+      "description": "Project Gutenberg: auto-generated EPUB 3. Common source of OPF and metadata warnings.",
+      "expect_clean": false,
+      "known_issues": {
+        "pg1342.epub": {
+          "notes": "Pride and Prejudice",
+          "expected_checks": ["OPF-036"]
+        },
+        "pg11.epub": {
+          "notes": "Alice's Adventures in Wonderland",
+          "expected_checks": ["OPF-036"]
+        },
+        "pg84.epub": {
+          "notes": "Frankenstein",
+          "expected_checks": ["OPF-036"]
+        }
+      }
+    },
+    "feedbooks": {
+      "description": "Feedbooks: public domain EPUB 3. Different toolchain than Gutenberg.",
+      "expect_clean": false,
+      "known_issues": {}
+    },
+    "internet-archive": {
+      "description": "Internet Archive: diverse digitization pipelines, widest variety of issues.",
+      "expect_clean": false,
+      "known_issues": {}
+    },
+    "epub3-samples": {
+      "description": "IDPF/W3C reference samples. Should mostly validate cleanly.",
+      "expect_clean": true,
+      "known_issues": {}
+    },
+    "epub-testsuite": {
+      "description": "W3C EPUB conformance test documents. Mix of valid and intentionally invalid.",
+      "expect_clean": false,
+      "known_issues": {}
+    }
+  }
+}

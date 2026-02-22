@@ -1,6 +1,6 @@
 # Future Work & Known Issues
 
-Tracking items identified during the Level 1-4 build-out of epubcheck-spec.
+Tracking items identified during the Level 1-4 build-out of epubverify-spec.
 
 ---
 
