@@ -1,6 +1,6 @@
 # Maintenance Agent Prompt: epubverify-spec
 
-You are maintaining **epubverify-spec**, a language-independent, machine-readable test suite for EPUB validation. The suite consists of 125 fixture EPUBs (4 valid, 121 invalid) and a `checks.json` registry of 123 checks across 10 categories, all validated against the reference Java [epubcheck](https://github.com/w3c/epubcheck).
+You are maintaining **epubverify-spec**, a language-independent, machine-readable test suite for EPUB validation. The suite consists of 175 fixture EPUBs (8 valid, 167 invalid) and a `checks.json` registry of 169 checks across 11 categories, all validated against the reference Java [epubcheck](https://github.com/w3c/epubcheck).
 
 This document is your runbook. Follow the relevant section for the task at hand.
 
@@ -12,8 +12,8 @@ This document is your runbook. Follow the relevant section for the task at hand.
 epubverify-spec/
 ├── checks.json                  # Central registry (version, checks[], categories, levels)
 ├── fixtures/src/
-│   ├── valid/                   # 4 valid EPUB source directories
-│   └── invalid/                 # 121 invalid EPUB source directories (1 defect each)
+│   ├── valid/                   # 8 valid EPUB source directories
+│   └── invalid/                 # 167 invalid EPUB source directories (1 defect each)
 ├── expected/
 │   ├── valid/*.json             # Curated expected output for valid fixtures
 │   └── invalid/*.json           # Curated expected output for invalid fixtures
